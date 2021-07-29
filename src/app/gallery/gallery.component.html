@@ -1,0 +1,32 @@
+<div class="row mt-4" *ngIf="imagesFetched">
+  <div *ngFor="let img of images; let i=index" class="col-xxl-3 col-lg-4 col-md-6 mt-3 mb-2">
+    <div class="card h-100" data-bs-toggle="modal" [attr.data-bs-target]="'#img'+i">
+      <img [src]="img.image_url" class="card-img-top" alt="{{ img.title }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ img.short_title }}</h5>
+        <p class="card-text">{{ img.short_description }}
+        </p>
+      </div>
+    </div>
+    <div class="modal fade" [id]="'img'+i" tabindex="-1" aria-labelledby="imgLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl text-center">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imgLabel">{{ img.title }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img [src]="img.image_url" class="modal-img img-responsive" alt="{{ img.title }}">
+          </div>
+          <div class="modal-footer" style="display: block;">
+            {{ img.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4" *ngIf="!imagesFetched">
+  <h4>Cannot fetch the photos. Please try again later!</h4>
+</div>
